@@ -10,7 +10,7 @@ employeeTable = $('employees');
 // SET A COUNT VARIABLE TO DISPLAY NEXT TO EMPLOYEES HEADER
 // let count = table.rows.length;
 let count = 0;
-
+$('empCount').innerText = count;
 // function addCell(value) {
 
 // }
@@ -46,10 +46,10 @@ form.addEventListener('submit', (e) => {
    
 
     // CREATE THE DELETE BUTTON
-    // let cellDelete = row.insertCell();
-    // let deleteButton = document.createElement('button');
-    // deleteButton.innerHTML = "Delete";
-    // cellDelete.appendChild(deleteButton);
+    let cellDelete = row.insertCell();
+    let deleteButton = document.createElement('button');
+    deleteButton.innerHTML = "Delete";
+    cellDelete.appendChild(deleteButton);
 
     // RESET THE FORM
     form.reset();
@@ -58,18 +58,25 @@ form.addEventListener('submit', (e) => {
     
     // INCREMENENT THE NUMBER OF EMPLOYEES IN THE TABLE
     count++;
-    $('output').innerHTML = count;
+    $('empCount').innerText = count;
     
 })
 
 // DELETE EMPLOYEE
-// document.$('employees').addEventListener('click', function(e) {
-//     if (e.target.tagname === "BUTTON") {
-//         confirm("Do you want to delete this employee?");
+employeeTable.addEventListener('click', function(e) {
+    if (e.target.tagName === "BUTTON") {
+        if (confirm("Are you sure you want to delete this employee?")) {   
+            // alternate method
+            // let row = e.target.closest('tr');
+            // if (row) {
+            //     row.remove();
+            // }
+            let row = e.target.parentNode.parentNode;
+            let index = row.rowIndex;
+            employeeTable.deleteRow(index);
+        count--;
+        $('empCount').innerText = count;
 
-//         let row = e.target.closest('tr');
-//         if (row) {
-//             row.remove();
-//         }
-//     }
-// } )
+        }
+    }
+} )
