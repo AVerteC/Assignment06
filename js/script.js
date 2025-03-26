@@ -66,11 +66,6 @@ form.addEventListener('submit', (e) => {
 employeeTable.addEventListener('click', function(e) {
     if (e.target.tagName === "BUTTON") {
         if (confirm("Are you sure you want to delete this employee?")) {   
-            // alternate method
-            // let row = e.target.closest('tr');
-            // if (row) {
-            //     row.remove();
-            // }
             let row = e.target.parentNode.parentNode;
             let index = row.rowIndex;
             employeeTable.deleteRow(index);
